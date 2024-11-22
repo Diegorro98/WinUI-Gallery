@@ -17,6 +17,7 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.System;
 using WinUIGallery.DesktopWap.Helper;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace WinUIGallery
 {
@@ -82,9 +83,6 @@ namespace WinUIGallery
                 soundToggle.IsOn = true;
             if (ElementSoundPlayer.SpatialAudioMode == ElementSpatialAudioMode.On)
                 spatialSoundBox.IsOn = true;
-#if DEBUG
-            ScreenshotCard.Visibility = Visibility.Visible;
-#endif
         }
 
         // Known issue: Caption buttons currently do not update colors with theme changes.
@@ -118,12 +116,6 @@ namespace WinUIGallery
             }
         }
 
-        private void screenshotModeToggle_Toggled(object sender, RoutedEventArgs e)
-        {
-            UIHelper.IsScreenshotMode = screenshotModeToggle.IsOn;
-        }
-
-
         private void navigationLocation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Since setting the left mode does not look at the old setting we 
@@ -133,25 +125,6 @@ namespace WinUIGallery
                 NavigationOrientationHelper.IsLeftModeForElement(navigationLocation.SelectedIndex == 0, this);
                 lastNavigationSelectionMode = navigationLocation.SelectedIndex;
             }
-        }
-
-        private async void FolderButton_Click(object sender, RoutedEventArgs e)
-        {
-            FolderPicker folderPicker = new FolderPicker();
-            folderPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            folderPicker.FileTypeFilter.Add(".png"); // meaningless, but you have to have something
-            StorageFolder folder = await folderPicker.PickSingleFolderAsync();
-
-            if (folder != null)
-            {
-                UIHelper.ScreenshotStorageFolder = folder;
-                screenshotFolderLink.Content = UIHelper.ScreenshotStorageFolder.Path;
-            }
-        }
-
-        private async void screenshotFolderLink_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchFolderAsync(UIHelper.ScreenshotStorageFolder);
         }
 
         private void spatialSoundBox_Toggled(object sender, RoutedEventArgs e)
@@ -169,6 +142,13 @@ namespace WinUIGallery
         private void soundPageHyperlink_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(ItemPage), new NavigationRootPageArgs() { Parameter = "Sound", NavigationRootPage = NavigationRootPage.GetForElement(this) });
+        }
+
+        private void toCloneRepoCard_Click(object sender, RoutedEventArgs e)
+        {
+            DataPackage package = new DataPackage();
+            package.SetText(gitCloneTextBlock.Text);
+            Clipboard.SetContent(package);
         }
 
         private async void bugRequestCard_Click(object sender, RoutedEventArgs e)

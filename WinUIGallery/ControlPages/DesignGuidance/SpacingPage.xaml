@@ -60,9 +60,9 @@
                     <Setter Property="Background" Value="{ThemeResource AccentFillColorDefaultBrush}" />
                 </Style.Setters>
             </Style>
-
         </ResourceDictionary>
     </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -91,7 +91,9 @@
                         HorizontalAlignment="Center"
                         Style="{StaticResource SubtitleTextBlockStyle}"
                         Text="Page with cards layout" />
-                    <Image Grid.Row="1" Source="{ThemeResource CardsImage}" />
+                    <controls:SampleThemeListener Grid.Row="1">
+                        <Image Source="{ThemeResource CardsImage}" />
+                    </controls:SampleThemeListener>
                 </Grid>
                 <Grid VerticalAlignment="Top" RowSpacing="12">
                     <Grid.RowDefinitions>
@@ -102,16 +104,20 @@
                         HorizontalAlignment="Center"
                         Style="{StaticResource SubtitleTextBlockStyle}"
                         Text="Form layout" />
-                    <Image Grid.Row="1" Source="{ThemeResource DialogImage}" />
+                    <controls:SampleThemeListener Grid.Row="1">
+                        <Image Source="{ThemeResource DialogImage}" />
+                    </controls:SampleThemeListener>
                 </Grid>
             </StackPanel>
         </ScrollView>
+
         <Grid
             Grid.Row="2"
             Margin="0,36,0,0"
             Style="{StaticResource GalleryTileGridStyle}">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Auto">
                 <StackPanel Padding="12,24,12,12">
+                    <!--  header  -->
                     <Grid Margin="16,0,0,0" HorizontalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="206" />
@@ -143,9 +149,7 @@
                         <TextBlock Style="{StaticResource DescriptionTextStyle}" Text="Spacing between UI controls, control + label." />
                     </Grid>
                     <!--  12epx  -->
-                    <Grid
-                        Grid.ColumnDefinitions="86,136,*"
-                        Style="{StaticResource DesignRowLightCardStyle}">
+                    <Grid Grid.ColumnDefinitions="86,136,*" Style="{StaticResource DesignRowLightCardStyle}">
                         <TextBlock Style="{StaticResource ValueTextStyle}" Text="12epx" />
                         <Border Width="12" Style="{StaticResource VisualBorderStyle}" />
                         <TextBlock Style="{StaticResource DescriptionTextStyle}" Text="Spacing between control + header, surface and edge text, text sections." />
@@ -157,9 +161,7 @@
                         <TextBlock Style="{StaticResource DescriptionTextStyle}" Text="Padding used in list styles, cards." />
                     </Grid>
                     <!--  24epx  -->
-                    <Grid
-                  Style="{StaticResource DesignRowLightCardStyle}"
-                        Grid.ColumnDefinitions="86,136,*">
+                    <Grid Grid.ColumnDefinitions="86,136,*" Style="{StaticResource DesignRowLightCardStyle}">
                         <TextBlock Style="{StaticResource ValueTextStyle}" Text="24epx" />
                         <Border Width="24" Style="{StaticResource VisualBorderStyle}" />
                         <TextBlock Style="{StaticResource DescriptionTextStyle}" Text="Spacing between content sections." />
@@ -171,9 +173,7 @@
                         <TextBlock Style="{StaticResource DescriptionTextStyle}" Text="Padding on pages." />
                     </Grid>
                     <!--  48epx  -->
-                    <Grid
-                        Style="{StaticResource DesignRowCardStyle}"
-                        Grid.ColumnDefinitions="86,136,*">
+                    <Grid Grid.ColumnDefinitions="86,136,*" Style="{StaticResource DesignRowLightCardStyle}">
                         <TextBlock Style="{StaticResource ValueTextStyle}" Text="48epx" />
                         <Border Width="48" Style="{StaticResource VisualBorderStyle}" />
                         <TextBlock Style="{StaticResource DescriptionTextStyle}" Text="Spacing between page sections with title." />

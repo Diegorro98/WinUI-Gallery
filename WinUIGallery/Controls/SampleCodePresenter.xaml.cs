@@ -11,25 +11,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using WinUIGallery.Helper;
 using ColorCode;
 using ColorCode.Common;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
-using Windows.System;
-using Windows.UI.Core;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
-using WinUIGallery.Common;
 using System.Reflection;
 using System.IO;
 using Microsoft.UI.Xaml.Automation;
 
 namespace WinUIGallery.Controls
 {
-
     public enum SampleCodePresenterType
     {
         XAML,
@@ -91,10 +86,6 @@ namespace WinUIGallery.Controls
             if (IsEmpty)
             {
                 Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                Visibility = Visibility.Visible;
             }
         }
 
@@ -176,7 +167,6 @@ namespace WinUIGallery.Controls
         {
             if (sourceRelativePath != null && sourceRelativePath.EndsWith("txt"))
             {
-
                 string sampleString = null;
                 StorageFile file = null;
                 if (!NativeHelper.IsAppPackaged)
@@ -227,10 +217,9 @@ namespace WinUIGallery.Controls
 
             actualCode = sampleString;
 
-            var name = GetSampleLanguageVisualState() == "InlineSample" ? actualCode : SampleHeader.Text;
+            var name = GetSampleLanguageVisualState() == "InlineSample" ? actualCode : SampleType.ToString();
             var automationName = "Copy " + name + " Code";
             AutomationProperties.SetName(CopyCodeButton, automationName);
-
 
             var formatter = GenerateRichTextFormatter();
             if (SampleType == SampleCodePresenterType.Inline)
